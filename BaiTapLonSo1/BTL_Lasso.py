@@ -14,7 +14,7 @@ X_test = dt_Test.iloc[:,[1,2,3,4]]
 y_test = dt_Test.iloc[:,4]
 print(f'X_train = \n{X_train}\nY_train = \n{y_train}\nX_test = {X_test}\nY_test = \n{y_test}')
 
-ls = Lasso(alpha=1.0, fit_intercept=True, precompute=False, copy_X=True, max_iter=1000, tol=0.0001, warm_start=False, positive=False, random_state=None, selection='cyclic')
+ls = Lasso(alpha=0.1, fit_intercept=True, precompute=False, copy_X=True, max_iter=10000, tol=0.0000001, warm_start=False, positive=False, random_state=None, selection='cyclic')
 ls.fit(X_train,y_train,sample_weight=None,check_input=True)
 
 y_pred = ls.predict(X_test)
