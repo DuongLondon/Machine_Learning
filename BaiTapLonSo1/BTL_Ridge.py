@@ -14,7 +14,7 @@ X_test = dt_Test.iloc[:,[1,2,3,4]]
 y_test = dt_Test.iloc[:,4]
 print(f'X_train = \n{X_train}\nY_train = \n{y_train}\nX_test = {X_test}\nY_test = \n{y_test}')
 
-rg = Ridge(alpha=0.1, fit_intercept=True, copy_X=True, max_iter=None, tol=0.0001, solver='auto', positive=False, random_state=None)
+rg = Ridge(alpha=0.1, fit_intercept=True, copy_X=True, max_iter=None, tol=0.001, solver='auto', positive=False, random_state=None)
 rg.fit(X_train,y_train)
 
 y_pred = rg.predict(X_test)
