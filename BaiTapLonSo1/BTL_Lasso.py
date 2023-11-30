@@ -5,7 +5,7 @@ import numpy as np
 from sklearn.metrics import r2_score
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
-data = pd.read_csv("./Du_Lieu_1000_ban_ghi.csv")
+data = pd.read_csv("./Dulieudiem.csv")
 dt_Train,dt_Test = train_test_split(data,test_size=0.3,shuffle=True)
 
 X_train = dt_Train.iloc[:,[1,2,3,4]]
