@@ -47,7 +47,7 @@ for train_index, test_index in kf.split(dt_Train):
     y_pred_val = model_reg.predict(X_val)
 
     # Lasso
-    model_ls = Lasso(alpha=1.0, fit_intercept=True, precompute=False, copy_X=True, max_iter=1000, tol=0.0001, warm_start=False, positive=False, random_state=None, selection='cyclic')
+    model_ls = Lasso(alpha=0.01, fit_intercept=True, precompute=False, copy_X=True, max_iter=2000, tol=0.0001, warm_start=False, positive=False, random_state=None, selection='cyclic')
     model_ls.fit(X_train,y_train,sample_weight=None,check_input=True)
     y_pred_ls_train = model_ls.predict(X_train)
     y_pred_ls_val = model_ls.predict(X_val)
@@ -84,17 +84,38 @@ y_pred_reg = best_model_reg.predict(X_test)
 y_pred_ls = best_model_ls.predict(X_test)
 y_pred_rg = best_model_rg.predict(X_test)
 
+y_test_array = np.array(y_test)
+
+mse_reg = mean_squared_error(y_test,y_pred_reg)
+mse_ls = mean_squared_error(y_test,y_pred_ls)
+mse_rg = mean_squared_error(y_test,y_pred_rg)
+
+rmse_reg = np.sqrt(mse_reg)
+rmse_ls = np.sqrt(mse_ls)
+rmse_rg = np.array(mse_rg)
+
 print("Coefficient of determination - Linear Regression: %.4f" % r2_score(y_test,y_pred_reg))
-# print("Thuc te          Du doan              Chenh lech")
-# for i in range(0,len(y_test_array)):
-#     print("%.2f" % y_test_array[i]," ",y_pred_reg[i]," ",abs(y_test_array[i]-y_pred_reg[i]))
+print("MAE: %.2f" % mean_absolute_error(y_test,y_pred_reg))
+print("MSE: %.2f" % mse_reg)
+print("RMSE: %.2f" % rmse_reg)
+print("Thuc te          Du doan              Chenh lech")
+for i in range(0,len(y_test_array)):
+    print("%.2f" % y_test_array[i]," ",y_pred_reg[i]," ",abs(y_test_array[i]-y_pred_reg[i]))
 
+print("--------------------------------------------------------------------------------")
 print("Coefficient of determination - Lasso: %.4f" % r2_score(y_test,y_pred_ls))
-# print("Thuc te          Du doan              Chenh lech")
-# for i in range(0,len(y_test_array)):
-#     print("%.2f" % y_test_array[i]," ",y_pred_ls[i]," ",abs(y_test_array[i]-y_pred_ls[i]))
+print("MAE: %.2f" % mean_absolute_error(y_test,y_pred_ls))
+print("MSE: %.2f"% mse_ls)
+print("RMSE: %.2f" % rmse_ls)
+print("Thuc te          Du doan              Chenh lech")
+for i in range(0,len(y_test_array)):
+    print("%.2f" % y_test_array[i]," ",y_pred_ls[i]," ",abs(y_test_array[i]-y_pred_ls[i]))
 
+print("--------------------------------------------------------------------------------")
 print("Coefficient of determination - Ridge: %.4f" % r2_score(y_test,y_pred_rg))
-# print("Thuc te          Du doan              Chenh lech")
-# for i in range(0,len(y_test_array)):
-#     print("%.2f" % y_test_array[i]," ",y_pred_rg[i]," ",abs(y_test_array[i]-y_pred_rg[i]))
+print("MAE: %.2f" % mean_absolute_error(y_test,y_pred_rg))
+print("MSE: %.2f"% mse_rg)
+print("RMSE: %.2f" % rmse_rg)
+print("Thuc te          Du doan              Chenh lech")
+for i in range(0,len(y_test_array)):
+    print("%.2f" % y_test_array[i]," ",y_pred_rg[i]," ",abs(y_test_array[i]-y_pred_rg[i]))
