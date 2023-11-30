@@ -10,7 +10,7 @@ from sklearn.linear_model import Lasso
 from sklearn.linear_model import Ridge
 from sklearn.model_selection import KFold
 
-data = pd.read_csv("./Du_Lieu_1000_ban_ghi.csv")
+data = pd.read_csv("./Dulieudiem.csv")
 dt_Train,dt_Test = train_test_split(data,test_size=0.3,shuffle=True)
 
 X_train = dt_Train.iloc[:,[1,2,3,4]]
